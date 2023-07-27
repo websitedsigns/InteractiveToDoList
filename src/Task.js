@@ -2,72 +2,48 @@ import React, { useState } from 'react';
 
 const Task = ({ task, editTask, toggleTaskCompletion, deleteTask }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedContent, setEditedContent] = useState(task.content);
+  const [newContent, setNewContent] = useState(task.content);
 
-  const handleEdit = () => {
-    setIsEditing(true);
+  const handleEditInputChange = (event) => {
+    setNewContent(event.target.value);
   };
 
-  const handleSave = () => {
-    if (editedContent.trim() !== '') {
-      editTask(task.id, editedContent);
-      setIsEditing(false);
+  const handleEditButtonClick = () => {
+    if (isEditing) {
+      editTask(task.id, newContent);
     }
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-    setEditedContent(task.content);
-  };
-
-  const handleToggleComplete = () => {
-    toggleTaskCompletion(task.id, !task.completed);
-  };
-
-  const handleDelete = () => {
-    deleteTask(task.id);
+    setIsEditing(!isEditing);
   };
 
   return (
     <div className={`task ${task.completed ? 'completed' : ''}`}>
-      {isEditing ? (
-        <div className="task-content">
+      <div className="task-content">
+        {isEditing ? (
           <input
             type="text"
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
+            value={newContent}
+            onChange={handleEditInputChange}
+            autoFocus
+            onFocus={(e) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)} // Move cursor to the end
           />
-        </div>
-      ) : (
-        <div className="task-content">
-          <p style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>{task.content}</p>
-        </div>
-      )}
+        ) : (
+          <p className="task-text">{task.content}</p>
+        )}
+      </div>
       <div className="task-actions">
         {isEditing ? (
-          <>
-            <button className="btn-save" onClick={handleSave}>
-              Save
-            </button>
-            <button className="btn-cancel" onClick={handleCancel}>
-              Cancel
-            </button>
-          </>
+          <button className="btn-edit" onClick={handleEditButtonClick}>
+            Save
+          </button>
         ) : (
           <>
-            <button className="btn-edit" onClick={handleEdit}>
-              Edit
+            <button
+              className={`btn-complete ${task.completed ? 'btn-unmark' : ''}`}
+              onClick={() => toggleTaskCompletion(task.id, !task.completed)}
+            >
+              {task.completed ? 'Unmark' : 'Complete'}
             </button>
-            {task.completed ? (
-              <button className="btn-unmark" onClick={handleToggleComplete}>
-                Unmark
-              </button>
-            ) : (
-              <button className="btn-complete" onClick={handleToggleComplete}>
-                Complete
-              </button>
-            )}
-            <button className="btn-delete" onClick={handleDelete}>
+            <button className="btn-delete" onClick={() => deleteTask(task.id)}>
               Delete
             </button>
           </>

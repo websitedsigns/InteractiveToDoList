@@ -38,14 +38,7 @@
     opacity: 0.8;
   }
   
-  /* Add this at the bottom of Task.css */
-  .tick-icon {
-    width: 20px;
-    height: 20px;
-    fill: #4caf50;
-    margin-left: 10px;
-    cursor: pointer;
-  }
+
   
   .task {
     display: flex;
@@ -57,6 +50,7 @@
     animation: fadeIn 0.3s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+
   }
 
   

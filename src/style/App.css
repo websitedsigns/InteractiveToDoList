@@ -1,24 +1,47 @@
-/* Add the Google Font link at the top of App.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-.app {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Roboto', sans-serif;
-  background-color:burlywood;
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color:darkcyan;
 }
 
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 45px;
+  padding: 10px;
+  width: 100%;
+  outline-style: outset;
+  outline-width: 4px;
+  max-width: 400px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 45px;
+  -o-border-radius: 45px;
+  -webkit-border-radius: 45px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  -webkit-animation:steps() ;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* At the end of the animation, set opacity to 1 to reveal the app */
   }
-  
-  /* Media query for responsiveness */
-  @media screen and (max-width: 600px) {
-    .app {
-      padding: 10px;
-    }
-  }
-  
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+
+

@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './style/App.css';
 import './style/Task.css';
 import './style/TaskForm.css';
 import './style/TaskList.css';
+import './style/RunningTotal.css';
 
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
+import RunningTotal from './RunningTotal';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-
-  // Load tasks from local storage on initial render
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (storedTasks && Array.isArray(storedTasks)) {
-      setTasks(storedTasks);
-    }
-  }, []);
 
   const addTask = (task) => {
     const newTask = { id: Date.now(), content: task, completed: false };
@@ -39,10 +33,9 @@ const App = () => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
-  // Update local storage when tasks change
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+  const countCompletedTasks = () => {
+    return tasks.filter((task) => task.completed).length;
+  };
 
   return (
     <div className="app">
@@ -54,6 +47,7 @@ const App = () => {
         toggleTaskCompletion={toggleTaskCompletion}
         deleteTask={deleteTask}
       />
+      <RunningTotal tasks={tasks} />
     </div>
   );
 };

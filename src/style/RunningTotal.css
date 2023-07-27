@@ -1,0 +1,21 @@
+.running-total {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top: 20px;
+    border-top-color:burlywood;
+    border-top-style:outset;
+
+  }
+  
+  .running-total p {
+    margin: 5px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .running-total p:first-child {
+    font-weight: bold;
+    
+  }
+  
